@@ -1,0 +1,148 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        API method - Delete Site
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">Description</a>
+            </li>
+            <li><a href="#profile" data-toggle="tab">Example PHP Code</a>
+            </li>
+            <li><a href="#messages" data-toggle="tab">Use method</a>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <h4>Delete Site</h4>
+                Deletes the site with a given id.
+                Requires ALL or SHARED level of the DELETE permission for INVENTORY items. When SHARED level is used, share type IS_OWNER or CAN_EDIT must be assigned to the requester and the requested entity.</br></br>
+
+                <p><strong>URL:</strong> rest-api/sites/{siteId}/delete.do.</p>
+
+                <p><strong>Method: </strong>POST.</p>
+
+                <strong>Response format:</strong> application/json.
+
+                <strong>Error codes:</strong>
+                <ul>
+                  <li>401 Unauthorized-authentication error.</li>
+                </ul>
+                <strong>Response sample:</strong>
+                200 OK.
+
+                <strong>Parameters:</strong>
+                <ul>
+                  <li>hash - an MD5 digest of a concatenated username's md5 password and a given timestamp;</li>
+                  <li>timestamp - UNIX timestamp used for hash generation;</li>
+                  <li>username - a given username.</li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="profile">
+                <pre class="language-php">
+                <code class="language-php">
+                $username = "";
+                $password = ""; 
+                $timestamp  = round(microtime(true) * 1000);
+                $hash = md5(md5($password).$timestamp);
+                $url="https://n29.epom.com/rest-api/sites/{site_id}/delete.do"; 
+
+                $post_data = array(
+                    "hash" => $hash,
+                    "timestamp" => $timestamp,
+                    "username" => $username
+                );
+                  /*specifying curl options*/
+                  $options = array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_POST => true, // POST method is used
+                    CURLOPT_POSTFIELDS => http_build_query($post_data), //POST request body parameters
+                    CURLOPT_HTTPHEADER => array('Content-type: application/x-www-form-urlencoded'), 
+                    CURLOPT_RETURNTRANSFER => true
+                  );
+                  /*connection initiation*/
+                  $curl = curl_init();
+                  /*Applying curl options to our curl instance*/
+                  curl_setopt_array($curl,$options);
+                  /*Executing the call*/
+                  $result=curl_exec($curl);
+
+                  echo $result;
+                </code>
+                </pre>
+            </div>
+            <div class="tab-pane fade" id="messages">
+                <div class="col-xs-6 col-sm-3">
+                    <div class="position" id="position-block">
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-files-o fa-fw"></i></span>
+                            <input type="text" class="form-control" placeholder="Username" id="username">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-wrench fa-fw"></i></span>
+                            <input type="password" class="form-control" placeholder="Password" id="password">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-table fa-fw"></i></span>
+                            <input type="text" class="form-control" placeholder="n101.epom.com" id="network">
+                        </div>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon"><i class="fa fa-dashboard fa-fw"></i></span>
+                            <input type="text" class="form-control" placeholder="Site ID" id="site_id">
+                        </div>
+                        <button type="submit" class="btn btn-default" id="request">Send Request</button>
+                    </div>
+                </div>  
+                <div class="col-lg-12">
+                    <div class="panel panel-default" id="hideblock">
+                        <div class="panel-heading">
+                            Response
+                        </div>
+                        <div class="panel-body" id="response">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $('#request').click(function()
+    {
+        $("#hideblock").slideToggle();
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var network = $('#network').val();
+        var site_id = $('#site_id').val();
+        
+        var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&idParam='+ site_id;
+        
+        $.ajax({ 
+            type: 'POST',   
+            url: "../script/delete.php",   
+            data: dataString,
+            success : function(text){
+                $('#response').html(text);
+            }
+        });
+    });
+});
+/* $(document).ready(function() {
+    $("#request").click(function() {                
+        $.ajax({    //create an ajax request to load_page.php
+            type: "GET",
+            url: "../script/delete.php",             
+            dataType: "html",                   
+            success: function(response){                    
+                $(".response").html(response); 
+            }
+        });
+    });
+});*/
+</script>
