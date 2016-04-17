@@ -3,18 +3,15 @@
 require '../api/publisherApimethods.php';
 
 $username=$_POST['name'];
-/*$password=$_POST['password'];
+$password=$_POST['password'];
 $n=$_POST['nUrl'];
 $site_name=$_POST['site'];
-$zone_id=$_POST['zone'];
-$email_site=$_POST['email'];
+$defult_zone=$_POST['zone'];
+$email=$_POST['email'];
 $category_site=$_POST['category'];
-$description_site=$_POST['description'];
 $link_site=$_POST['link'];
-$url_site=$_POST['url'];*/
+$url_site=$_POST['url'];
 
-var_dump($username);
-die();
+$publisher = new Publisher_api($username, $password);
 
-$publisher = new Publisher_api();
-$publisher->Create_Site($username, $password, $site_name, $n, $category_site, $email_site, $category_site, $url, $description_site, $link_site);
+$publisher->Create_Site($n, $site_name,$email, $category_site, $url_site, $defult_zone, $link_site);

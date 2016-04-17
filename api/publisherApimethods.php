@@ -3,26 +3,37 @@
 include 'curl_methods.php';
 
 class Publisher_api extends Curl{
+    
+    public $username;
+    public $password;
+    public $timestamp;
+            
+    function __construct($username, $password) {
+        $this->timestamp = round(microtime(true) * 1000);
+        $this->password = md5(md5($password).$this->timestamp);
+        $this->username = $username;
+    }
 
-    public function Create_Site($username, $password, $name_site, $n, $categoryId, $email, $createDefaultZone, $url, $description, $allowPlacementBannersLinkingChange){
+    public function Create_Site($n, $name_site, $email, $categoryId, $site_url, $createDefaultZone, $allowPlacementBannersLinkingChange){
         
         $url = "https://".$n."/rest-api/sites/update.do";
-        $timestamp = $this->define_timestamp();
-        $hash = md5(md5($password).$timestamp);
+        
         $post_data = array(
-            "hash" => $hash,
-            "username" => $username,
-            "timestamp" => $timestamp,
+            "hash" => $this->password,
+            "username" => $this->username,
+            "timestamp" => $this->timestamp,
             "name" => $name_site,
             "email" => $email,
-            "categoryId" => $categoryId
+            "categoryId" => $categoryId,
+            "url" => $site_url
         );
+        
         if($createDefaultZone == true){
             array_push($post_data, $post_data['createDefaultZone']=true);
         }
-        else if(strlen(trim($url))> 0){
+        /*else if(strlen(trim($url))> 0){
             array_push($post_data, $post_data['url']=$url);
-        }
+        }*/
         else if($allowPlacementBannersLinkingChange == true){
             array_push($post_data, $post_data['allowPlacementBannersLinkingChange']=true);
         }

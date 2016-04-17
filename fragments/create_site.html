@@ -247,73 +247,16 @@ $(document).ready(function(){
         e.preventDefault();
         $("#hideblock").slideToggle();
         var username = $('#username').val();
-        /*var password = $('#password').val();
-        var network = $('#network').val();
-        var site_name = $('#site_name').val();
-        var site_url = $('#url').val();
-        var default_zone = document.getElementById("defaultzone").checked;;
-        var email_site = $('#site_email').val();
-        var category = $('#categoryid').val();
-        var placementLink = document.getElementById("placementLink").checked;*/
-
-        //var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&site='+ site_name + '&zone='+ default_zone + '&url='+ site_url + '&email='+ email_site + '&category='+ category +'&link='+ placementLink;
-        var dataString = 'name='+ username;
-        $.ajax({ 
-            type: 'POST',   
-            url: "../script/create_site.php",   
-            data: dataString,
-            success : function(text){
-                $('#response').html(text);
-            }
-        });
-        //e.preventDefault();
-    });
-}); 
-    $('#resetBtn').click(function() {
-        $('#demo-form').data('bootstrapValidator').resetForm(true);
-    });
-/*$(function () {
-            $('#request').click(function() {
-            $("#hideblock").slideToggle();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            var network = $('#network').val();
-            var site_name = $('#site_name').val();
-            var site_url = $('#url').val();
-            var default_zone = document.getElementById("defaultzone").checked;;
-            var email_site = $('#site_email').val();
-            var category = $('#categoryid').val();
-            var placementLink = document.getElementById("placementLink").checked;
-
-            var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&site='+ site_name + '&zone='+ default_zone + '&url='+ site_url + '&email='+ email_site + '&category='+ category + '&description='+ description + '&link='+ placementLink;
-
-            $.ajax({ 
-                type: 'POST',   
-                url: "../script/create_site.php",   
-                data: dataString,
-                success : function(text){
-                    $('#response').html(text);
-                }
-            });
-        });
-  });
-*/
-/*$(document).ready(function()
-{
-    $('#request').click(function()
-    {
-        $("#hideblock").slideToggle();
-        var username = $('#username').val();
         var password = $('#password').val();
         var network = $('#network').val();
         var site_name = $('#site_name').val();
         var site_url = $('#url').val();
         var default_zone = document.getElementById("defaultzone").checked;;
-        var email_site = $('#site_email').val();
+        var email_site = $('#email').val();
         var category = $('#categoryid').val();
         var placementLink = document.getElementById("placementLink").checked;
-        
-        var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&site='+ site_name + '&zone='+ default_zone + '&url='+ site_url + '&email='+ email_site + '&category='+ category + '&description='+ description + '&link='+ placementLink;
+
+        var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&site='+ site_name + '&zone='+ default_zone + '&url='+ site_url + '&email='+ email_site + '&category='+ category +'&link='+ placementLink;
         
         $.ajax({ 
             type: 'POST',   
@@ -324,7 +267,10 @@ $(document).ready(function(){
             }
         });
     });
-});
+}); 
+    $('#resetBtn').click(function() {
+        $('#demo-form').data('bootstrapValidator').resetForm(true);
+    });
 /* $(document).ready(function() {
     $("#request").click(function() {                
         $.ajax({    //create an ajax request to load_page.php
