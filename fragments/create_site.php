@@ -52,39 +52,40 @@ Requires ALL or SHARED level on CREATE/UPDATE permission for INVENTORY items. Wh
                 </ul>
             </div>
             <div class="tab-pane fade" id="profile">
-                <pre class="language-php">
-                <code class="language-php">
-                $username = "";
-                $password = ""; 
-                $timestamp  = round(microtime(true) * 1000);
-                $hash = md5(md5($password).$timestamp);
-                $url="https://n29.epom.com/rest-api/sites/{site_id}/delete.do"; 
+                <figure class="highlight">
+                    <pre>
+                        <code class="language-php">
+                            $username = "";
+                            $password = ""; 
+                            $timestamp  = round(microtime(true) * 1000);
+                            $hash = md5(md5($password).$timestamp);
+                            $url="https://n29.epom.com/rest-api/sites/{site_id}/delete.do"; 
 
-                $post_data = array(
-                    "hash" => $hash,
-                    "timestamp" => $timestamp,
-                    "username" => $username
-                );
-                  /*specifying curl options*/
-                  $options = array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_SSL_VERIFYPEER => false,
-                    CURLOPT_POST => true, // POST method is used
-                    CURLOPT_POSTFIELDS => http_build_query($post_data), //POST request body parameters
-                    CURLOPT_HTTPHEADER => array('Content-type: application/x-www-form-urlencoded'), 
-                    CURLOPT_RETURNTRANSFER => true
-                  );
-                  /*connection initiation*/
-                  $curl = curl_init();
-                  /*Applying curl options to our curl instance*/
-                  curl_setopt_array($curl,$options);
-                  /*Executing the call*/
-                  $result=curl_exec($curl);
+                            $post_data = array(
+                                "hash" => $hash,
+                                "timestamp" => $timestamp,
+                                "username" => $username
+                            );
+                              /*specifying curl options*/
+                              $options = array(
+                                CURLOPT_URL => $url,
+                                CURLOPT_SSL_VERIFYPEER => false,
+                                CURLOPT_POST => true, // POST method is used
+                                CURLOPT_POSTFIELDS => http_build_query($post_data), //POST request body parameters
+                                CURLOPT_HTTPHEADER => array('Content-type: application/x-www-form-urlencoded'), 
+                                CURLOPT_RETURNTRANSFER => true
+                              );
+                              /*connection initiation*/
+                              $curl = curl_init();
+                              /*Applying curl options to our curl instance*/
+                              curl_setopt_array($curl,$options);
+                              /*Executing the call*/
+                              $result=curl_exec($curl);
 
-                  echo $result;
-                </code>
-                </pre>
-                <!-- Single button -->
+                              echo $result;
+                        </code>
+                    </pre>
+                </figure>
                 <div class="btn-group">
                   <button type="button" class="btn btn-primary">Download Example Code</button>
                 </div>
@@ -157,7 +158,7 @@ Requires ALL or SHARED level on CREATE/UPDATE permission for INVENTORY items. Wh
                 <div class="col-lg-12">
                     <div class="panel panel-default" id="hideblock">
                         <div class="panel-heading">
-                            API Response
+                            API Response <span class="label label-success">STATUS</span> <?="401"; ?> <span class="label label-info">TIME</span> <?="1043ms"; ?>
                         </div>
                         <div class="panel-body" id="response"></div>
                     </div>

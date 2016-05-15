@@ -444,7 +444,7 @@
                             $desc.load('fragments/get_sites.html');
                             break;
                     case 'create_site.html' :
-                            $desc.load('fragments/create_site.html');
+                            $desc.load('fragments/create_site.php');
                             break;
                     case 'iris.html' :
                             $desc.load('fragments/irises.html');
