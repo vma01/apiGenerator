@@ -6,11 +6,13 @@ class Curl {
     public $hash;
     public $password;
     public $timestamp;
-    
+    public $curl;
+
+
     public function define_timestamp(){
         return $this->timestamp = round(microtime(true) * 1000);
     }
-    
+
     public function Post_data($url, $post_data){
        $options = array(
             CURLOPT_URL => $url,
@@ -23,19 +25,30 @@ class Curl {
         $curl = curl_init();
         curl_setopt_array($curl,$options);
         $result = curl_exec($curl);
-        echo $result;
+        return $result;
     }
     
-     public function Get_data($url, $post_data){
+    public function Get_data($url, $post_data){
         $options = array(
             CURLOPT_URL => $url."?".http_build_query($post_data),
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_RETURNTRANSFER => true
         );
-        $curl = curl_init();
-        curl_setopt_array($curl,$options);
-        $result = curl_exec($curl);
-        echo $result;
+        $this->curl = curl_init();
+        curl_setopt_array($this->curl,$options);
+        
+        $result = curl_exec($this->curl);
+        return $result;
+    }
+    
+    public function Get_Status(){
+        $status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE); 
+        return $status;
+    }
+    
+     public function Get_Time(){
+        $time = curl_getinfo($this->curl, CURLINFO_TOTAL_TIME);
+        return $time;
     }
 }
 

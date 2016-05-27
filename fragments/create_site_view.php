@@ -158,7 +158,7 @@ Requires ALL or SHARED level on CREATE/UPDATE permission for INVENTORY items. Wh
                 <div class="col-lg-12">
                     <div class="panel panel-default" id="hideblock">
                         <div class="panel-heading">
-                            API Response <span class="label label-success">STATUS</span> <?="401"; ?> <span class="label label-info">TIME</span> <?="1043ms"; ?>
+                            API Response <span class="label label-success">STATUS </span><span id="status"></span> <span class="label label-info">TIME </span><span id="time"></span>
                         </div>
                         <div class="panel-body" id="response"></div>
                     </div>
@@ -258,13 +258,18 @@ $(document).ready(function(){
         var placementLink = document.getElementById("placementLink").checked;
 
         var dataString = 'name='+ username + '&password='+ password + '&nUrl='+ network + '&site='+ site_name + '&zone='+ default_zone + '&url='+ site_url + '&email='+ email_site + '&category='+ category +'&link='+ placementLink;
-        
+     
         $.ajax({ 
             type: 'POST',   
-            url: "../script/create_site.php",   
+            url: "../script/create_site.php",
+            dataType: "json",
             data: dataString,
-            success : function(text){
-                $('#response').html(text);
+            success : function(result){
+                console.log(result);
+                console.log(typeof result);
+                $("#response").html(result.responseRequest);
+                $("#status").html(result.statusResponse);
+                $("#time").html(result.timeResponse);
             }
         });
     });

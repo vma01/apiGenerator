@@ -35,7 +35,7 @@
     <link href="../dist/css/bootstrapValidator.min.css" rel="stylesheet">
      <!-- Style example code highlightjs-->
     <!--<link href="../dist/stylescode/default.css" rel="stylesheet">-->
-    <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" rel="stylesheet">
+   <!-- <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -427,9 +427,9 @@
     <script src="../dist/js/bootstrapValidator.js"></script>
     <!-- Style example code highlightjs  -->
     <!--<script src="../dist/js/highlight.pack.js"></script>-->
-    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <!--<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     
-    <script>prettyPrint();</script>
+    <script>prettyPrint();</script>-->
     
     <script>
         $(document).ready(function(e) {
@@ -441,10 +441,10 @@
                             $desc.load('fragments/delete.html');
                             break;
                     case 'get_sites.html' :
-                            $desc.load('fragments/get_sites.html');
+                            $desc.load('fragments/get_sites_view.php');
                             break;
                     case 'create_site.html' :
-                            $desc.load('fragments/create_site.php');
+                            $desc.load('fragments/create_site_view.php');
                             break;
                     case 'iris.html' :
                             $desc.load('fragments/irises.html');

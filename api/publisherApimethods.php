@@ -37,7 +37,7 @@ class Publisher_api extends Curl{
         else if($allowPlacementBannersLinkingChange == true){
             array_push($post_data, $post_data['allowPlacementBannersLinkingChange']=true);
         }
-        $this->Post_data($url, $post_data);
+        return $this->Post_data($url, $post_data);
     }
      
     public function Update_Site($n){
@@ -64,7 +64,13 @@ class Publisher_api extends Curl{
     
     public function Get_Sites($n){
         $url = "https://".$n."/rest-api/sites.do";
-        $this->Get_data($url);
+        
+        $post_data = array(
+            "hash" => $this->password,
+            "username" => $this->username,
+            "timestamp" => $this->timestamp
+        );
+        return $this->Get_data($url, $post_data);
     }
 }
 
