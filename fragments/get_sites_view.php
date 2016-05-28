@@ -28,17 +28,17 @@
 
                 <strong>Error codes:</strong>
                 <ul>
-                  <li>401 Unauthorized-authentication error.</li>
+                    <li>401 Unauthorized-authentication error.</li>
                 </ul>
                 <strong>Response sample:</strong>
                 200 OK.
 
                 <strong>Parameters:</strong>
                 <ul>
-                  <li>hash - an MD5 digest of a concatenated username's md5 password and a given timestamp;</li>
-                  <li>timestamp - UNIX timestamp used for hash generation;</li>
-                  <li>username - a given username.</li>
-                  <li>publishingCategories - IDs of Inventory categories to filter results (optional, comma-separated).</li>
+                    <li>hash - an MD5 digest of a concatenated username's md5 password and a given timestamp;</li>
+                    <li>timestamp - UNIX timestamp used for hash generation;</li>
+                    <li>username - a given username.</li>
+                    <li>publishingCategories - IDs of Inventory categories to filter results (optional, comma-separated).</li>
                 </ul>
             </div>
             <div class="tab-pane fade" id="profile">
@@ -134,86 +134,86 @@
 </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-    $("#demo-form").bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields : {
-            password : {
-                validators: {
-                    notEmpty: {
-                        message: 'The password cannot be empty'
-                    }
-                }
+    $(document).ready(function () {
+        $("#demo-form").bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
             },
-            username : {
-                validators: {
-                    notEmpty: {
-                        message: 'The username cannot be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 characters long'
+            fields: {
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The password cannot be empty'
+                        }
                     }
-                }
-            },
-            network : {
-                validators: {
-                    notEmpty: {
-                        message: 'The field Network cannot be empty'
+                },
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The username cannot be empty'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'The username must be more than 6 characters long'
+                        }
                     }
-                }
-            },
-            category : {
-                validators: {
-                    numeric: {
-                        message: 'Only numbers are allowed'
+                },
+                network: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The field Network cannot be empty'
+                        }
+                    }
+                },
+                category: {
+                    validators: {
+                        numeric: {
+                            message: 'Only numbers are allowed'
+                        }
                     }
                 }
             }
-        }
-    })
-    .on('success.form.bv', function(e) {
-        e.preventDefault();
-        $("#hideblock").slideToggle();
-        var username = $('#username').val();
-        var password = $('#password').val();
-        var network = $('#network').val();
-        var categories = $('#category').val();
+        })
+                .on('success.form.bv', function (e) {
+                    e.preventDefault();
+                    $("#hideblock").slideToggle();
+                    var username = $('#username').val();
+                    var password = $('#password').val();
+                    var network = $('#network').val();
+                    var categories = $('#category').val();
 
-        var dataString = 'name='+ username + '&password='+ password + '&network='+ network + '&category='+ categories;
-     
-        $.ajax({ 
-            type: 'POST',   
-            url: "../script/get_sites.php",
-            dataType: "json",
-            data: dataString,
-            success : function(result){
-                //console.log(typeof result);
-                $("#response").html(result.responseRequest);
-                $("#status").html(result.statusResponse);
-                $("#time").html(result.timeResponse);
-            }
-        });
+                    var dataString = 'name=' + username + '&password=' + password + '&network=' + network + '&category=' + categories;
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "../script/get_sites.php",
+                        dataType: "json",
+                        data: dataString,
+                        success: function (result) {
+                            //console.log(typeof result);
+                            $("#response").html(result.responseRequest);
+                            $("#status").html(result.statusResponse);
+                            $("#time").html(result.timeResponse);
+                        }
+                    });
+                });
     });
-}); 
-    $('#resetBtn').click(function() {
+    $('#resetBtn').click(function () {
         $('#demo-form').data('bootstrapValidator').resetForm(true);
     });
-/* $(document).ready(function() {
-    $("#request").click(function() {                
-        $.ajax({    //create an ajax request to load_page.php
-            type: "GET",
-            url: "../script/delete.php",             
-            dataType: "html",                   
-            success: function(response){                    
-                $(".response").html(response); 
-            }
-        });
-    });
-});*/
+    /* $(document).ready(function() {
+     $("#request").click(function() {                
+     $.ajax({    //create an ajax request to load_page.php
+     type: "GET",
+     url: "../script/delete.php",             
+     dataType: "html",                   
+     success: function(response){                    
+     $(".response").html(response); 
+     }
+     });
+     });
+     });*/
 </script>
