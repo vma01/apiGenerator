@@ -453,11 +453,10 @@
                             pageUrl = 'fragments/peruvian.html';
                             break;
                 }
-                
                 if(pageUrl) {
-                    console.log('load: ' + pageUrl);
+                    //console.log('load: ' + pageUrl);
                     $desc.load(pageUrl, function() {
-                        console.log('loaded: ' + pageUrl);
+                        //console.log('loaded: ' + pageUrl);
                         $('pre code').each(function(i, block) {
                             hljs.highlightBlock(block);
                         });

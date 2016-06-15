@@ -44,7 +44,6 @@
                 <pre>
                     <code class="language-php">
                         define("DEBUG",false);
-
                         /*Initiating username and password variables, generating current timestamp and hash*/
                         $username = "";
                         $password = "";
@@ -84,10 +83,10 @@
                     </code>
                 </pre>
                 <div class="btn-group">
-                    <a href=""><button type="button" class="btn btn-primary">Download Example Code</button></a>
-                </div>
+                    <button type="button" class="btn btn-primary" download id="download" hidden>Download Example Code</button>
+                </div> 
             </div>
-             <div class="tab-pane fade" id="sampleResponse">
+            <div class="tab-pane fade" id="sampleResponse">
                 <pre>
                     <code class="language-json">
                         [{"name":"Area51 (R&D) (SUPPORT, DON'T TOUCH IT)","id":220},{"name":"site test_training","id":357}]
@@ -212,4 +211,7 @@
     $('#resetBtn').click(function () {
         $('#demo-form').data('bootstrapValidator').resetForm(true);
     });
+    $( "#download" ).click(function() {
+        window.open("/Publisher API scripts/Get_Sites_test.txt","_blank");
+});
 </script>

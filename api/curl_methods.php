@@ -22,9 +22,9 @@ class Curl {
             CURLOPT_HTTPHEADER => array('Content-type: application/x-www-form-urlencoded'),
             CURLOPT_RETURNTRANSFER => true
         );
-        $curl = curl_init();
-        curl_setopt_array($curl,$options);
-        $result = curl_exec($curl);
+        $this->curl = curl_init();
+        curl_setopt_array($this->curl,$options);
+        $result = curl_exec($this->curl);
         return $result;
     }
     
@@ -36,7 +36,6 @@ class Curl {
         );
         $this->curl = curl_init();
         curl_setopt_array($this->curl,$options);
-        
         $result = curl_exec($this->curl);
         return $result;
     }

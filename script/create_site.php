@@ -13,16 +13,14 @@ $link_site=$_POST['link'];
 $url_site=$_POST['url'];
 
 $publisher = new Publisher_api($username, $password);
-
 $responseRequest = $publisher->Create_Site($n, $site_name,$email, $category_site, $url_site, $defult_zone, $link_site);
-
-$statusResponse = $publisher->status;
-$timeResponse = $publisher->time;
+$getStatus = $publisher->Get_Status();
+$getTime = $publisher->Get_Time();
 
 $results = array(
     'responseRequest' => $responseRequest,
-    'statusResponse' => $statusResponse,
-    'timeResponse' => $timeResponse
+    'statusResponse' => $getStatus,
+    'timeResponse' => $getTime
 );
 
 header('Content-Type: application/json');
