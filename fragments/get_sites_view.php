@@ -6,11 +6,10 @@
     <div class="panel-body">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#home" data-toggle="tab">Description</a>
-            </li>
-            <li><a href="#profile" data-toggle="tab">Example PHP Code</a>
-            </li>
-            <li><a href="#messages" data-toggle="tab">Use method</a>
+            <li class="active"><a href="#home" data-toggle="tab">Description</a></li>
+            <li><a href="#profile" data-toggle="tab">Sample PHP Code</a></li>
+            <li><a href="#sampleResponse" data-toggle="tab">Sample Response</a></li>
+            <li><a href="#messages" data-toggle="tab">Use method</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -42,47 +41,57 @@
                 </ul>
             </div>
             <div class="tab-pane fade" id="profile">
-                <pre class="language-php">
-                <code class="language-php">
-                    define("DEBUG",false);
+                <pre>
+                    <code class="language-php">
+                        define("DEBUG",false);
 
-                    /*Initiating username and password variables, generating current timestamp and hash*/
-                    $username = "";
-                    $password = "";
-                    $timestamp  = round(microtime(true) * 1000);
-                    $hash = md5(md5($password).$timestamp);
-                    
-                    $url = "https://nXX.epom.com/rest-api/sites.do";
-                    //nXX is the network's id, e.g. n29.epom.com
-                    //if you have whitelabel account, please use its domain instead of nXX.epom.com
+                        /*Initiating username and password variables, generating current timestamp and hash*/
+                        $username = "";
+                        $password = "";
+                        $timestamp  = round(microtime(true) * 1000);
+                        $hash = md5(md5($password).$timestamp);
 
-                    $post_data = array(
-                        "hash" => $hash,
-                        "timestamp" => $timestamp,
-                        "username" => $username
-                    );
+                        $url = "https://nXX.epom.com/rest-api/sites.do";
+                        //nXX is the network's id, e.g. n29.epom.com
+                        //if you have whitelabel account, please use its domain instead of nXX.epom.com
 
-                    /*specifying curl options*/
-                    $options = array(
-                        CURLOPT_URL => $url."?".http_build_query($post_data),
-                        CURLOPT_SSL_VERIFYPEER => false,
-                        CURLOPT_RETURNTRANSFER => true
-                    );
+                        $post_data = array(
+                            "hash" => $hash,
+                            "timestamp" => $timestamp,
+                            "username" => $username
+                        );
 
-                    /*connection initiation*/
-                    $curl = curl_init();
-                    /*Applying curl options to our curl instance*/
-                    curl_setopt_array($curl,$options);
-                    /*Executing the call*/
-                    $result = curl_exec($curl);
-                    echo $result;
+                        /*specifying curl options*/
+                        $options = array(
+                            CURLOPT_URL => $url."?".http_build_query($post_data),
+                            CURLOPT_SSL_VERIFYPEER => false,
+                            CURLOPT_RETURNTRANSFER => true
+                        );
 
-                    if(DEBUG){
-                        echo "\n\n";
-                        echo $url;
-                        print_r($post_data);
-                    }
-                </code>
+                        /*connection initiation*/
+                        $curl = curl_init();
+                        /*Applying curl options to our curl instance*/
+                        curl_setopt_array($curl,$options);
+                        /*Executing the call*/
+                        $result = curl_exec($curl);
+                        echo $result;
+
+                        if(DEBUG){
+                            echo "\n\n";
+                            echo $url;
+                            print_r($post_data);
+                        }
+                    </code>
+                </pre>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-primary">Download Example Code</button>
+                </div>
+            </div>
+             <div class="tab-pane fade" id="sampleResponse">
+                <pre>
+                    <code class="language-json">
+                        [{"name":"Area51 (R&D) (SUPPORT, DON'T TOUCH IT)","id":220},{"name":"site test_training","id":357}]
+                    </code>
                 </pre>
             </div>
             <div class="tab-pane fade" id="messages">
@@ -177,43 +186,30 @@
                 }
             }
         })
-                .on('success.form.bv', function (e) {
-                    e.preventDefault();
-                    $("#hideblock").slideToggle();
-                    var username = $('#username').val();
-                    var password = $('#password').val();
-                    var network = $('#network').val();
-                    var categories = $('#category').val();
+        .on('success.form.bv', function (e) {
+            e.preventDefault();
+            $("#hideblock").slideToggle();
+            var username = $('#username').val();
+            var password = $('#password').val();
+            var network = $('#network').val();
+            var categories = $('#category').val();
 
-                    var dataString = 'name=' + username + '&password=' + password + '&network=' + network + '&category=' + categories;
+            var dataString = 'name=' + username + '&password=' + password + '&network=' + network + '&category=' + categories;
 
-                    $.ajax({
-                        type: 'POST',
-                        url: "../script/get_sites.php",
-                        dataType: "json",
-                        data: dataString,
-                        success: function (result) {
-                            //console.log(typeof result);
-                            $("#response").html(result.responseRequest);
-                            $("#status").html(result.statusResponse);
-                            $("#time").html(result.timeResponse);
-                        }
-                    });
-                });
+            $.ajax({
+                type: 'POST',
+                url: "../script/get_sites.php",
+                dataType: "json",
+                data: dataString,
+                success: function (result) {
+                    $("#response").html(result.responseRequest);
+                    $("#status").html(result.statusResponse);
+                    $("#time").html(result.timeResponse);
+                }
+            });
+        });
     });
     $('#resetBtn').click(function () {
         $('#demo-form').data('bootstrapValidator').resetForm(true);
     });
-    /* $(document).ready(function() {
-     $("#request").click(function() {                
-     $.ajax({    //create an ajax request to load_page.php
-     type: "GET",
-     url: "../script/delete.php",             
-     dataType: "html",                   
-     success: function(response){                    
-     $(".response").html(response); 
-     }
-     });
-     });
-     });*/
 </script>

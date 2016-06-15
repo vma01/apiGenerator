@@ -34,8 +34,7 @@
      <!-- Validator css -->
     <link href="../dist/css/bootstrapValidator.min.css" rel="stylesheet">
      <!-- Style example code highlightjs-->
-    <!--<link href="../dist/stylescode/default.css" rel="stylesheet">-->
-   <!-- <link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" rel="stylesheet">
+    <link href="../bower_components/highlightjs/styles/github.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -426,33 +425,43 @@
     <!-- Validator js  -->
     <script src="../dist/js/bootstrapValidator.js"></script>
     <!-- Style example code highlightjs  -->
-    <!--<script src="../dist/js/highlight.pack.js"></script>-->
-    <!--<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     
-    <script>prettyPrint();</script>-->
+	<script src="../bower_components/highlightjs/highlight.pack.js"></script>
     
-    <script>
+   <script>
         $(document).ready(function(e) {
             $('#side-menu').find('a').on('click', function(e){
                 e.preventDefault();
                 var $desc = $('.content');
+                pageUrl = '';
                 switch($(this).attr('href')) {
                     case 'delete.html' :
-                            $desc.load('fragments/delete.html');
+                            pageUrl = 'fragments/delete.html';
                             break;
                     case 'get_sites.html' :
-                            $desc.load('fragments/get_sites_view.php');
+                            pageUrl = 'fragments/get_sites_view.php';
                             break;
                     case 'create_site.html' :
-                            $desc.load('fragments/create_site_view.php');
+                            pageUrl = 'fragments/create_site_view.php';
                             break;
                     case 'iris.html' :
-                            $desc.load('fragments/irises.html');
+                            pageUrl = 'fragments/irises.html';
                             break;
                     case 'alstromeria.html' :
-                            $desc.load('fragments/peruvian.html');
+                            pageUrl = 'fragments/peruvian.html';
                             break;
                 }
+                
+                if(pageUrl) {
+                    console.log('load: ' + pageUrl);
+                    $desc.load(pageUrl, function() {
+                        console.log('loaded: ' + pageUrl);
+                        $('pre code').each(function(i, block) {
+                            hljs.highlightBlock(block);
+                        });
+                    });
+                }
+               
             });
         });
     </script>
