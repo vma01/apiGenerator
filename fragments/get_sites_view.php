@@ -84,7 +84,7 @@
                     </code>
                 </pre>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-primary">Download Example Code</button>
+                    <a href=""><button type="button" class="btn btn-primary">Download Example Code</button></a>
                 </div>
             </div>
              <div class="tab-pane fade" id="sampleResponse">

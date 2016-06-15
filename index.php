@@ -19,6 +19,8 @@
     <!-- Timeline CSS -->
     <link href="../dist/css/timeline.css" rel="stylesheet">
     
+    <link rel="icon" href="../dist/images/favicon.png" type="image/x-icon">
+    
     <link href="../dist/css/additional.css" rel="stylesheet">
 
     <!-- Custom CSS -->

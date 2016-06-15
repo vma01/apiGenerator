@@ -50,6 +50,14 @@ class Curl {
         $time = curl_getinfo($this->curl, CURLINFO_TOTAL_TIME);
         return $time;
     }
+    public function DownloadSampleCode($fileurl){
+        $filename = $fileurl;
+        header("Content-Length: " . filesize($filename));
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=something.doc');
+        
+        return readfile($filename);
+    }
 }
 
 
